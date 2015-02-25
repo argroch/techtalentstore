@@ -39,5 +39,17 @@
   <%= image_tag @product.image.url(:medium) %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<p>
+  <%= form_tag('/add_to_cart') do %>
+    <div class="cant-see-me">
+      <%= number_field_tag :product_id, @product.id %>
+    </div>
+    <%= number_field_tag :quantity, nil, placeholder: "How Many?" %><br />  
+    <%= submit_tag "Buy It!", class: "btn btn-danger" %>
+  <% end %>
+</p>
+
+<div>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', products_path %>
+</div>

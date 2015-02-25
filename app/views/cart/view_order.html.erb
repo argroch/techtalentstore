@@ -1,0 +1,18 @@
+<h1>Items In Your Cart</h1>
+
+<div>
+	<% @line_items.each do |line_item| %>
+		<ul>
+			<li><%= line_item.product.name %></li>
+			<li><%= number_to_currency line_item.product.price %></li>
+			<li><%= line_item.quantity %></li>
+			<li><%= number_to_currency line_item.line_item_total %></li>
+		</ul>
+	<% end %>
+</div>
+
+<div>
+	<%= form_tag('/checkout') do %>
+		<%= submit_tag "Proceed to Checkout?", class: "btn btn-warning" %>
+	<% end %>
+</div>

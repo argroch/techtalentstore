@@ -13,7 +13,7 @@
 						<span class="glyphicon glyphicon-plus"></span> quick info
 					</a></p>
 					<p><strong><%= number_to_currency product.price %></strong></p>
-					<p><%= product.name %></p>
+					<p><%= link_to product.name, product %></p>
 					<div style="height:150px;">
 						<p><%= product.description %></p>
 					</div>
