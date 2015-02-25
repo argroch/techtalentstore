@@ -1,6 +1,8 @@
 class StorefrontController < ApplicationController
   def all_items
   	@products = Product.all
+    @products_lowhigh = Product.order(:price)
+    @products_highlow = Product.order(price: :desc)
   end
 
   def items_by_category

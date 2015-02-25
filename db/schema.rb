@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224182444) do
+ActiveRecord::Schema.define(version: 20150225023309) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20150224182444) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "line_items_array"
     t.text     "order_items"
   end
 

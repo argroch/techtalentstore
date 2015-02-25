@@ -3,10 +3,10 @@
 <div>
 	<% @line_items.each do |line_item| %>
 		<ul>
-			<li><%= line_item.product.name %></li>
-			<li><%= number_to_currency line_item.product.price %></li>
-			<li><%= line_item.quantity %></li>
-			<li><%= number_to_currency line_item.line_item_total %></li>
+			<li><strong>Item:</strong> <%= line_item.product.name %></li>
+			<li><strong>Item Price:</strong> <%= number_to_currency line_item.product.price %></li>
+			<li><strong>Qty:</strong> <%= line_item.quantity %></li>
+			<li><strong>Total:</strong> <%= number_to_currency line_item.line_item_total %></li>
 		</ul>
 	<% end %>
 </div>
