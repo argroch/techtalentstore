@@ -1,17 +1,38 @@
 class CartController < ApplicationController
   
-	before_filter :authenticate_user!, :except => [:add_to_cart, :view_order]
+	before_filter :authenticate_user!, :except => [:add_to_cart, :view_order, :change_quantity, :remove_from_cart]
 
   def add_to_cart
-  	line_item = LineItem.new
-  	line_item.product_id = params[:product_id]
-  	line_item.quantity = params[:quantity]
-  	line_item.save
+    product = Product.find(params[:product_id])
+    if product.quantity < params[:quantity].to_i
+      redirect_to product, notice: 'Not enough quantity in stock to complete order!'
+    else
+    	line_item = LineItem.new
+    	line_item.product_id = params[:product_id]
+    	line_item.quantity = params[:quantity]
+    	line_item.save
 
-  	line_item.line_item_total = line_item.product.price * line_item.quantity
-  	line_item.save
+    	line_item.line_item_total = line_item.product.price * line_item.quantity
+    	line_item.save
 
-  	redirect_to root_path
+    	redirect_to root_path
+    end
+  end
+
+  def change_quantity
+    line_item = LineItem.find(params[:line_item_id])
+    line_item.quantity = params[:quantity]
+    line_item.save
+
+    redirect_to view_order_path
+  end
+
+  def remove_from_cart
+    line_item = LineItem.find(params[:line_item_id])
+    line_item.destroy
+    line_item.save
+
+    redirect_to view_order_path
   end
 
   def view_order

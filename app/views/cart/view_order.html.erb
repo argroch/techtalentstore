@@ -1,18 +1,57 @@
 <h1>Items In Your Cart</h1>
 
-<div>
-	<% @line_items.each do |line_item| %>
-		<ul>
-			<li><strong>Item:</strong> <%= line_item.product.name %></li>
-			<li><strong>Item Price:</strong> <%= number_to_currency line_item.product.price %></li>
-			<li><strong>Qty:</strong> <%= line_item.quantity %></li>
-			<li><strong>Total:</strong> <%= number_to_currency line_item.line_item_total %></li>
-		</ul>
-	<% end %>
-</div>
+<div class="row mtop-40">
+	<div class="col-md-6">
+		<% @line_items.each do |line_item| %>
+			<div class="item-border">
+				<div class="row mtop-40">
+					<div class="col-md-3">
+						<%= image_tag line_item.product.image.url(:thumb) %>
+					</div>
+					<div class="col-md-7">
+						<p>
+							<h4><%= line_item.product.name %></h4>
+						</p>
+						<p>
+							<%= number_to_currency line_item.product.price %>
+						</p>
+						<p>
+							<%= form_tag change_quantity_path do %>
+								<div class="cant-see-me">
+									<%= number_field_tag :line_item_id, line_item.id %>
+								</div>
+								<%= number_field_tag :quantity, line_item.quantity, class: "sm-field" %>
+								<%= submit_tag "Change Qty", class: "btn btn-warning" %>
+							<% end %>
+						</p>
+						<p>
+							<strong>Total:</strong> <%= number_to_currency line_item.line_item_total %>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-md-offset-8">
+						<%#= form_tag remove_from_cart_path do %>
+							<!-- <div class="cant-see-me"> -->
+							<%#= number_field_tag :line_item_id, line_item.id %>
+							<!-- </div> -->
+							<%#= submit_tag "Remove Item", class: "btn btn-danger" %>
+						<%# end %>
+						<%= link_to "Remove Item", remove_from_cart_path(line_item_id: line_item.id) %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
 
-<div>
-	<%= form_tag('/checkout') do %>
-		<%= submit_tag "Proceed to Checkout?", class: "btn btn-warning" %>
-	<% end %>
+	<div class="col-md-4 col-md-offset-2">
+		<p>
+			Everything looking good?
+		</p>
+		<p>
+			<%= form_tag('/checkout') do %>
+				<%= submit_tag "Proceed to Checkout!", class: "btn btn-success" %>
+			<% end %>
+		</p>
+	</div>
 </div>

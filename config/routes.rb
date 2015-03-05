@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   post 'order_complete' => 'cart#order_complete'
 
+  post 'change_quantity' => 'cart#change_quantity'
+
+  get 'remove_from_cart' => 'cart#remove_from_cart'
+
   resources :orders
 
   resources :line_items
