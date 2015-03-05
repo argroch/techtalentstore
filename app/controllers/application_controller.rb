@@ -18,6 +18,15 @@ class ApplicationController < ActionController::Base
   	return @brands
   end
 
+  def remote_ip
+    if request.remote_ip == '127.0.0.1'
+      # Hard coded remote address
+      "#{ENV['my_url']}"
+    else
+      request.remote_ip
+    end
+  end
+
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   
