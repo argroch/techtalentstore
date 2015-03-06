@@ -10,6 +10,11 @@ class CartController < ApplicationController
     	line_item = LineItem.new
     	line_item.product_id = params[:product_id]
     	line_item.quantity = params[:quantity]
+      if user_signed_in?
+        line_item.customer_key = (current_user.id).to_s
+      else
+        line_item.customer_key = remote_ip
+      end
     	line_item.save
 
     	line_item.line_item_total = line_item.product.price * line_item.quantity
@@ -36,7 +41,19 @@ class CartController < ApplicationController
   end
 
   def view_order
-  	@line_items = LineItem.all
+    all_li = LineItem.all
+    @line_items = []
+
+    all_li.each do |li|
+      if user_signed_in?
+        if (current_user.id).to_s == li.customer_key
+        	@line_items.push(li)
+        end
+      end
+      if remote_ip == li.customer_key
+        @line_items.push(li)
+      end
+    end
   end
 
   def checkout
