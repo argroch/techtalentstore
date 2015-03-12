@@ -22,6 +22,10 @@ body {
 	display: none;
 }
 
+.center-it {
+	text-align: center;
+}
+
 .red-text {
 	color: red;
 }

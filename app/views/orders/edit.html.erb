@@ -1,6 +1,10 @@
-<h1>Editing order</h1>
+<% if can? :update, @order %>
+	<h1>Editing order</h1>
 
-<%= render 'form' %>
+	<%= render 'form' %>
 
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', orders_path %>
+	<%= link_to 'Show', @order %> |
+	<%= link_to 'Back', orders_path %>
+<% else %>
+  <%= render 'storefront/notallowed' %>
+<% end %>

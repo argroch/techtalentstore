@@ -1,66 +1,82 @@
 <p id="notice" class="red-text"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<div class="row">
+  <div class="col-md-5">
+    <p>
+      <strong>Name:</strong>
+      <%= @product.name %>
+    </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency @product.price %>
-</p>
+    <p>
+      <strong>Price:</strong>
+      <%= number_to_currency @product.price %>
+    </p>
 
-<% if @product.quantity < 5 && @product.quantity > 0 %>
-  <p>
-    Hurry! Only <%= @product.quantity %> left in stock!
-  </p>
-<% end %>
-<% if @product.quantity == 0 %>
-  <p>
-    Sorry, we're all out of stock right now.
-  </p>
-<% end %>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @product.brand %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @product.rating %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @product.category.name %>
-</p>
-
-<p>
-  <%= image_tag @product.image.url(:medium) %>
-</p>
-
-<% if @product.quantity > 0 %>
-  <p>
-    <%= form_tag('/add_to_cart') do %>
-      <div class="cant-see-me">
-        <%= number_field_tag :product_id, @product.id %>
-      </div>
-      <p><%= number_field_tag :quantity, nil, placeholder: "How Many?" %></p>  
-      <p><%= submit_tag "Buy It!", class: "btn btn-danger" %></p>
+    <% if @product.quantity < 5 && @product.quantity > 0 %>
+      <p>
+        Hurry! Only <%= @product.quantity %> left in stock!
+      </p>
     <% end %>
-  </p>
-<% end %>
+    <% if @product.quantity == 0 %>
+      <p>
+        Sorry, we're all out of stock right now.
+      </p>
+    <% end %>
 
-<div>
-  <%= link_to 'Edit', edit_product_path(@product) %> |
-  <%= link_to 'Back', products_path %>
+    <p>
+      <strong>Description:</strong>
+      <%= @product.description %>
+    </p>
+
+    <p>
+      <strong>Brand:</strong>
+      <%= @product.brand %>
+    </p>
+
+    <p>
+      <strong>Rating:</strong>
+      <%= @product.rating %>
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      <%= @product.category.name %>
+    </p>
+  </div>
+  <div class="col-md-5 col-md-offset-1">
+    <p>
+      <%= image_tag @product.image.url(:medium) %>
+    </p>
+  </div>
 </div>
+<div>
+  <% if @product.quantity > 0 %>
+    <p>
+      <%= form_tag('/add_to_cart') do %>
+        <div class="cant-see-me">
+          <%= number_field_tag :product_id, @product.id %>
+        </div>
+        <p><%= number_field_tag :quantity, nil, placeholder: "How Many?" %></p>  
+        <p><%= submit_tag "Buy It!", class: "btn btn-danger" %></p>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+<% if can? :update, @product %>
+  <div class="well">
+    <h3>Info for Employees</h3>
+    <p>
+      <strong>Quantity:</strong> <%= @product.quantity %>
+    </p>
+    <p>
+      <strong>Category:</strong> <%= @product.category.name %>
+    </p>
+    <p>
+      <%= link_to 'Edit', edit_product_path(@product) %> |
+      <%= link_to 'Back', products_path %>
+    </p>
+  </div>
+<% end %>
 
 <% if notice != nil %>
   <script>

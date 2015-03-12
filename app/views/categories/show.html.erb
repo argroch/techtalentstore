@@ -1,9 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% if can? :update, @category %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+	<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+	<p>
+	  <strong>Name:</strong>
+	  <%= @category.name %>
+	</p>
+
+	<%= link_to 'Edit', edit_category_path(@category) %> |
+	<%= link_to 'Back', categories_path %>
+
+<% else %>
+  <%= render 'storefront/notallowed' %>
+<% end %>
