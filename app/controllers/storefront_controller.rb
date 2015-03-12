@@ -1,4 +1,5 @@
 class StorefrontController < ApplicationController
+
   def all_items
   	@products = Product.all
     @products_lowhigh = Product.order(:price)
@@ -29,5 +30,5 @@ class StorefrontController < ApplicationController
   		end
   	end
   end
-  
+
 end
