@@ -1,4 +1,4 @@
-<p id="notice" class="red-text"><%= notice %></p>
+<!-- <p id="notice" class="red-text"><%= notice %></p> -->
 
 <div class="row">
   <div class="col-md-5">
@@ -62,25 +62,27 @@
     </p>
   <% end %>
 </div>
-<% if can? :update, @product %>
-  <div class="well">
-    <h3>Info for Employees</h3>
-    <p>
-      <strong>Quantity:</strong> <%= @product.quantity %>
-    </p>
-    <p>
-      <strong>Category:</strong> <%= @product.category.name %>
-    </p>
-    <p>
-      <%= link_to 'Edit', edit_product_path(@product) %> |
-      <%= link_to 'Back', products_path %>
-    </p>
-  </div>
+<% if user_signed_in? %>
+  <% if can? :update, @product %>
+    <div class="well">
+      <h3>Info for Employees</h3>
+      <p>
+        <strong>Quantity:</strong> <%= @product.quantity %>
+      </p>
+      <p>
+        <strong>Category:</strong> <%= @product.category.name %>
+      </p>
+      <p>
+        <%= link_to 'Edit', edit_product_path(@product) %> |
+        <%= link_to 'Back', products_path %>
+      </p>
+    </div>
+  <% end %>
 <% end %>
 
-<% if notice != nil %>
+<%# if notice != nil %>
   <script>
-    var something = "<%= notice %>";
-    alert(something);
+    //var something = "<%= notice %>";
+    //alert(something);
   </script>
-<% end %>
+<%# end %>
