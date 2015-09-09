@@ -10,9 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+ 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
 
 body {
 	padding-top: 70px;
@@ -56,4 +58,15 @@ body {
 
 .checkboxers {
 	padding: 10px;
+}
+
+.yellow {
+	color: yellow;
+}
+
+@media screen and (max-width: 690px){
+	.checkboxers{
+		margin-left: 3px !important;
+		margin-right: 3px !important;
+	}
 }

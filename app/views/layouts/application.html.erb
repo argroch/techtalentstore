@@ -7,11 +7,6 @@
   <title>Tech Talent Store</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -61,6 +56,15 @@
 </nav>
 
 <div class="container">
+  <% for_device_type :desktop do %>
+    <p>Desktop, laptop...not a phone or tablet.</p>
+  <% end %>
+  <% for_device_type :tablet do %>
+    <p>You're on a tablet. That's so cool!</p>
+  <% end %>
+  <% for_device_type :mobile do %>
+    <p>You're on a phone! Text me!</p>
+  <% end %>
 	<%= yield %>
 </div>
 

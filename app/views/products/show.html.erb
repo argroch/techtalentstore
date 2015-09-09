@@ -34,9 +34,16 @@
     </p>
 
     <p>
-      <strong>Rating:</strong>
+      <strong>Customer Rating:</strong>
       <%= @product.rating %>
     </p>
+    <p>
+      <em>How would you rate this product?</em><br />
+      <% count = 1 %>
+      <% while count <= 5 do %>
+        <i class="fa fa-star-o fa-2x" id="rate_star<%=count%>"></i>
+        <% count += 1 %>
+      <% end %>
 
     <p>
       <strong>Category:</strong>
